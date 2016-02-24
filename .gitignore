@@ -37,9 +37,14 @@ nosetests.xml
 
 # Python virtualenv
 .venv
+.env
 
 # Flask-migrate directory
 migrations
 
 # LandingNet
 LandingNet/config.py
+
+# Temp
+*~
+*tmp

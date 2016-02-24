@@ -14,7 +14,7 @@
     </div>
     {% for dump in dumps %}
         <div class="row bordered {{ loop.cycle('odd', 'even') }}">
-            <div class="col-md-3"><a href="/minidump/{{ dump.id }}">{{ dump.timestamp|datetime }}</a></div>
+            <div class="col-md-3"><a href="{{ url_for( 'minidump', did=dump.id) }}">{{ dump.timestamp|datetime }}</a></div>
             <div class="col-md-1">{{ dump.product.name}}</div>
             <div class="col-md-1">{{ dump.product.version }}</div>
             <div class="col-md-3">{{ dump.build }}</div>
