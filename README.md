@@ -74,6 +74,18 @@ python manage.py run
 
 If you installed the demo, you can point your browser to http://localhost:5000 and see some processed minidumps
 
+Also you can LandingNet via the uwsgi:
+
+```bash
+uwsgi --socket 0.0.0.0:5000 -w wsgi:app
+```
+
+or daemonize:
+
+```bash
+uwsgi --socket 0.0.0.0:5000 -w wsgi:app &
+```
+
 # Using LandingNet
 The first things you want to do is to : 
 
