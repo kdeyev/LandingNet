@@ -1,0 +1,27 @@
+# docker-compose for Socorro development.
+#
+# Note: Requires docker-comopse 1.10+.
+version: "2"
+services:
+  # landingnet app
+  landingnet:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: kostyad/landingnet
+    depends_on:
+      - postgresql
+    command: ["python manage.py run"]
+    ports:
+      - "5000:5000"
+
+  # https://hub.docker.com/_/postgres/
+  postgresql:
+    image: postgres:9.4
+    ports:
+      - "5432:5432"
+    environment:
+      # Create the superuser account
+      - POSTGRES_USER=landingnet
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=landingnetdb
