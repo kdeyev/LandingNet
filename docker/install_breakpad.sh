@@ -1,5 +1,7 @@
 #!/bin/bash
 
+yum -y install gcc gcc-c++ make;
+
 cd third-party
 #svn co http://google-breakpad.googlecode.com/svn/trunk/ google-breakpad
 git clone https://github.com/google/breakpad.git

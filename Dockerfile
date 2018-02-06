@@ -15,8 +15,7 @@ RUN yum -y install git svn gcc gcc-c++ make postgresql-devel python-devel;
 #RUN yum clean all
 RUN pip install -r requirements.txt
 
-#RUN docker/install_python.sh
-RUN docker/install_breakpad.sh
+#RUN docker/install_breakpad.sh
 
 RUN cp docker/landingnet.config.py LandingNet/config.py
 RUN python manage.py db init
