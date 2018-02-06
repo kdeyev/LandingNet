@@ -9,12 +9,8 @@ USER 0
 
 RUN yum -y update; 
 RUN yum -y install epel-release;
-RUN yum -y install python python-pip; 
 
-RUN yum -y install git svn gcc gcc-c++ make postgresql-devel python-devel;
-#RUN yum clean all
-RUN pip install -r requirements.txt
-
+RUN docker/install_django.sh
 #RUN docker/install_breakpad.sh
 
 RUN cp docker/landingnet.config.py LandingNet/config.py

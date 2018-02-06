@@ -1,5 +1,6 @@
 #!/bin/bash
 
+yum -y install git svn;
 yum -y install gcc gcc-c++ make;
 
 cd third-party
