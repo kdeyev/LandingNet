@@ -1,5 +1,6 @@
 #FROM centos/postgresql-96-centos7
 FROM centos:centos7
+#FROM kostyad/pstgrsql
 
 COPY . /LandingNet
 
@@ -14,11 +15,11 @@ RUN docker/install_django.sh
 #RUN docker/install_breakpad.sh
 
 RUN cp docker/landingnet.config.py LandingNet/config.py
-RUN python manage.py db init
-RUN python manage.py db migrate
-RUN python manage.py db upgrade
+#RUN python manage.py db init
+#RUN python manage.py db migrate
+#RUN python manage.py db upgrade
 
-RUN python manage.py setup_demo
+#RUN python manage.py setup_demo
 
 EXPOSE 5000
 

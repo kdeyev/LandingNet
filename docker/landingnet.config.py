@@ -8,4 +8,4 @@ MINIDUMP_UPDLOAD_DIR = "minidumps"
 BREAKPAD_DEBUG_SYMBOLS_DIR = "breakpad-debug-symbols"
 DEBUG_SYMBOLS_DIR = "debug-symbols"
 STACKWALKER = "bin/stackwalker"
-TITLE = LandingNet
+TITLE = "LandingNet"
