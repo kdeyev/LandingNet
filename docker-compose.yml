@@ -17,7 +17,11 @@ services:
 
   # https://hub.docker.com/_/postgres/
   postgresql:
-    image: postgres:9.4
+    #image: postgres:9.4
+    #build:
+    #  context: ./docker-postgres
+    #  dockerfile: ./docker-postgres/Dockerfile
+    image: kostyad/pstgrsql
     ports:
       - "5432:5432"
     environment:

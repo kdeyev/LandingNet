@@ -1,6 +1,6 @@
 #FROM centos/postgresql-96-centos7
-FROM centos:centos7
-#FROM kostyad/pstgrsql
+#FROM centos:centos7
+FROM kostyad/pstgrsql
 
 COPY . /LandingNet
 
