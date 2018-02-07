@@ -16,6 +16,7 @@ ADD ./supervisord.conf /etc/supervisord.conf
 ADD ./start_postgres.sh /start_postgres.sh
 ADD ./create_extension.sh /create_extension.sh
 
+#remove me
 ENV POSTGRES_USER landingnet
 ENV POSTGRES_PASSWORD password
 ENV POSTGRES_DB landingnetdb
@@ -31,16 +32,9 @@ ADD ./postgresql.conf /var/lib/pgsql/data/postgresql.conf
 
 RUN chown -v postgres.postgres /var/lib/pgsql/data/postgresql.conf
 
-#RUN echo "local  all  landingnet trust" > /var/lib/pgsql/data/pg_hba.conf
-#RUN echo "host  all   landingnet 0.0.0.0/0  trust" >> /var/lib/pgsql/data/pg_hba.conf 
-#RUN echo "host  all   landingnet ::/0 trust" >> /var/lib/pgsql/data/pg_hba.conf
-
 RUN echo "local  all  all trust" > /var/lib/pgsql/data/pg_hba.conf
 RUN echo "host  all   all 0.0.0.0/0  trust" >> /var/lib/pgsql/data/pg_hba.conf 
 RUN echo "host  all   all ::/0 trust" >> /var/lib/pgsql/data/pg_hba.conf
-
-#RUN echo "local	all	all	trust" >> /var/lib/pgsql/data/pg_hba.conf
-#RUN echo "host	all	127.0.0.1/32	trust" >> /var/lib/pgsql/data/pg_hba.conf
 
 #RUN echo "host    all             all             0.0.0.0/0               md5" >> /var/lib/pgsql/data/pg_hba.conf
 

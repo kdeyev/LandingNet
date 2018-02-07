@@ -50,7 +50,7 @@ supervisord -n&
 __create_user
 __run_supervisor
 
-sleep 2
+sleep 5
 
 su postgres -c 'sh /create_extension.sh'
-sleep infinity
+#sleep infinity

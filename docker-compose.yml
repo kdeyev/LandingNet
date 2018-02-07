@@ -9,18 +9,16 @@ services:
       context: .
       dockerfile: ./Dockerfile
     image: kostyad/landingnet
-    depends_on:
-      - postgresql
-    command: ["python manage.py run"]
+    #depends_on:
+    #  - postgresql
+    #command: ["python manage.py run"]
     ports:
       - "5000:5000"
 
-  # https://hub.docker.com/_/postgres/
   postgresql:
-    #image: postgres:9.4
-    #build:
-    #  context: ./docker-postgres
-    #  dockerfile: ./docker-postgres/Dockerfile
+    build:
+      context: ./docker-postgresql
+      dockerfile: ./docker-postgresql/Dockerfile
     image: kostyad/pstgrsql
     ports:
       - "5432:5432"
