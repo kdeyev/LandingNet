@@ -186,8 +186,9 @@ def handleInvalidUsage(error):
 
 @app.template_filter("datetime")
 def format_datetime(value):
-    from babel.dates import format_datetime
-    return format_datetime(value, "YYYY-MM-dd 'at' HH:mm:ss")
+	return str (value)
+    #from babel.dates import format_datetime
+    #return format_datetime(value, "YYYY-MM-dd 'at' HH:mm:ss")
 
 @app.template_filter("normalizeFilename")
 def normalizeFilename(value):
