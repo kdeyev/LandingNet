@@ -14,7 +14,10 @@ services:
     #command: ["python manage.py run"]
     ports:
       - "5000:5000"
-
+    volumes:
+      - symbols:/LandingNet/debug-symbols
+      - minidumps:/LandingNet/minidumps
+      
   postgresql:
     build:
       context: ./docker-postgresql
@@ -27,3 +30,10 @@ services:
       - POSTGRES_USER=landingnet
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=landingnetdb
+    volumes:
+      - DB:/var/lib/pgsql
+      
+volumes:
+  DB:
+  symbols:
+  minidumps:

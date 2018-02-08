@@ -15,6 +15,8 @@ RUN docker/install_breakpad.sh
 
 RUN cp docker/landingnet.config.py LandingNet/config.py
 
+VOLUME ["LandingNet/debug-symbols"]
+VOLUME ["LandingNet/minidumps"]
 EXPOSE 5000
 
 CMD ["./docker/start_landingnet.sh"]
