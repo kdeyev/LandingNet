@@ -3,25 +3,11 @@
 # Note: Requires docker-comopse 1.10+.
 version: "2"
 services:
-  # landingnet app
-  landingnet:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    image: kostyad/landingnet
-    #depends_on:
-    #  - postgresql
-    #command: ["python manage.py run"]
-    ports:
-      - "5000:5000"
-    volumes:
-      - symbols:/LandingNet/debug-symbols
-      - minidumps:/LandingNet/minidumps
-      
+    
   postgresql:
     build:
       context: ./docker-postgresql
-      dockerfile: ./docker-postgresql/Dockerfile
+      dockerfile: ./Dockerfile
     image: kostyad/pstgrsql
     ports:
       - "5432:5432"
@@ -30,10 +16,25 @@ services:
       - POSTGRES_USER=landingnet
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=landingnetdb
-    volumes:
-      - DB:/var/lib/pgsql
+#    volumes:
+#      - DB: /var/lib/pgsql
       
-volumes:
-  DB:
-  symbols:
-  minidumps:
+  # landingnet app
+  landingnet:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: kostyad/landingnet
+    depends_on:
+      - postgresql
+    command: ["./docker/start_landingnet.sh"]
+    ports:
+      - "5000:5000"
+#    volumes:
+#      - symbols: /LandingNet/breakpad-debug-symbols
+#      - minidumps: /LandingNet/minidumps
+  
+#volumes:
+#  DB:
+#  symbols:
+#  minidumps:

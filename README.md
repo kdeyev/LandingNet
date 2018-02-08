@@ -144,7 +144,7 @@ curl -F minidump=@demo/demo.dmp -F product=Demo -F version=0.1 -F build=foobar h
     version : Version number (Must be an existing version)
 ```
 
-**Uning Docker**
+**Using Docker**
 create postgresql 
 ```cd docker-postgresql && docker build -t kostyad/pstgrsql .```
 
@@ -156,6 +156,10 @@ run landingnet
 or
 ```docker run --rm -p 5000:5000 kostyad/landingnet```
 
+**Using Docker-compose**
+```docker-compose build```
+
+```docker-compose up```
 
 # Licence 
 LandingNet is distributed under GPL V3

@@ -1,7 +1,10 @@
 #!/bin/bash
 
-/start_postgres.sh
+sleep 15
+
+#/start_postgres.sh
 python manage.py db init
+psql -h postgresql -U landingnet landingnetdb -c 'create extension hstore;'
 python manage.py db migrate
 python manage.py db upgrade
 

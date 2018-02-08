@@ -53,4 +53,4 @@ __run_supervisor
 sleep 5
 
 su postgres -c 'sh /create_extension.sh'
-#sleep infinity
+sleep infinity

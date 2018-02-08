@@ -4,11 +4,11 @@
 # Running CREATE EXTENSION in both template1 and postgres can lead to
 # the extensions having different eid's.
 
-#psql template1 -c 'create extension hstore;'
+psql template1 -c 'create extension hstore;'
 
-psql --dbname template1 <<EOSQL
-    CREATE EXTENSION hstore;
-    DROP DATABASE $POSTGRES_DB;
-    CREATE DATABASE $POSTGRES_DB TEMPLATE template1;
-EOSQL
+#psql --dbname template1 <<EOSQL
+#    CREATE EXTENSION hstore;
+#    DROP DATABASE $POSTGRES_DB;
+#    CREATE DATABASE $POSTGRES_DB TEMPLATE template1;
+#EOSQL
 

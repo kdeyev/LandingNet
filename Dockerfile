@@ -1,5 +1,5 @@
-#FROM centos:centos7
-FROM kostyad/pstgrsql
+FROM centos:centos7
+#FROM kostyad/pstgrsql
 
 COPY . /LandingNet
 
@@ -15,8 +15,8 @@ RUN docker/install_breakpad.sh
 
 RUN cp docker/landingnet.config.py LandingNet/config.py
 
-VOLUME ["LandingNet/debug-symbols"]
-VOLUME ["LandingNet/minidumps"]
+VOLUME ["/LandingNet/debug-symbols"]
+VOLUME ["/LandingNet/minidumps"]
 EXPOSE 5000
 
 CMD ["./docker/start_landingnet.sh"]
