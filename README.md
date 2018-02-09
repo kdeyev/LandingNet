@@ -146,15 +146,15 @@ curl -F minidump=@demo/demo.dmp -F product=Demo -F version=0.1 -F build=foobar h
 
 **Using Docker**
 create postgresql 
-```cd docker-postgresql && docker build -t kostyad/pstgrsql .```
+```cd docker-postgresql && docker build -t kdeyev/pstgrsql .```
 
 create landingnet 
-```docker build -t kostyad/landingnet .```
+```docker build -t kdeyev/landingnet .```
 
 run landingnet
-```docker run --rm -it -p 5000:5000 kostyad/landingnet sh```
+```docker run --rm -it -p 5000:5000 kdeyev/landingnet sh```
 or
-```docker run --rm -p 5000:5000 kostyad/landingnet```
+```docker run --rm -p 5000:5000 kdeyev/landingnet```
 
 **Using Docker-compose**
 ```docker-compose build```

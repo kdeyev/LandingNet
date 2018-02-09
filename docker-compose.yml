@@ -8,7 +8,7 @@ services:
     build:
       context: ./docker-postgresql
       dockerfile: ./Dockerfile
-    image: kostyad/pstgrsql
+    image: kdeyev/pstgrsql
     ports:
       - "5432:5432"
     environment:
@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: kostyad/landingnet
+    image: kdeyev/landingnet
     depends_on:
       - postgresql
     command: ["./docker/start_landingnet.sh"]
