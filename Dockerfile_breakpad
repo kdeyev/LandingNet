@@ -1,0 +1,15 @@
+FROM centos:centos7
+# docker build -t breakpad -f Dockerfile_breakpad .
+
+RUN mkdir /breakpad
+WORKDIR /breakpad
+
+COPY third-party/ /breakpad/third-party
+COPY docker/install_breakpad.sh /breakpad/docker/install_breakpad.sh
+
+USER 0
+
+RUN yum -y update; 
+RUN yum -y install epel-release;
+
+RUN /breakpad/docker/install_breakpad.sh

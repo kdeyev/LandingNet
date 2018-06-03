@@ -7,5 +7,5 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, "tools", "db_repository")
 MINIDUMP_UPDLOAD_DIR = "minidumps"
 BREAKPAD_DEBUG_SYMBOLS_DIR = "breakpad-debug-symbols"
 DEBUG_SYMBOLS_DIR = "debug-symbols"
-STACKWALKER = "third-party/minidump-stackwalk/stackwalker"
+STACKWALKER = "/breakpad/bin/stackwalker"
 TITLE = "LandingNet"

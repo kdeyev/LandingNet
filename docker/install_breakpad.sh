@@ -5,15 +5,15 @@ yum -y install gcc gcc-c++ make;
 
 cd third-party
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-export PATH=$PATH:/LandingNet/third-party/depot_tools/
+export PATH=$PATH:/breakpad/third-party/depot_tools/
 fetch breakpad
 cd src
 ./configure && make && make install
 cd ../
 cd minidump-stackwalk
 make
-#mkdir ../../bin/
-#cp stackwalker ../../bin/
+mkdir ../../bin/
+cp stackwalker ../../bin/
 cd ../../
 
 
