@@ -20,6 +20,7 @@ class Crashs(db.Model):
     signature = db.Column(db.String(40))
     created = db.Column(db.DateTime, default=datetime.now)
     updated = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    jira = db.Column(db.String(40))
     
 class MiniDump(db.Model):
     __tablename__ = "minidump"

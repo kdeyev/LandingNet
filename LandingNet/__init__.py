@@ -17,7 +17,7 @@ def index():
     from sqlalchemy import func
     from LandingNet.models import Crashs
     # TODO : Update this to query MiniDump and join with product and stacktrace
-    traces = Crashs.query.order_by(Crashs.updated.desc()).limit(10).all()
+    traces = Crashs.query.order_by(Crashs.updated.desc()).limit(100).all()
     return render_template("index.html", traces=traces)
 
 @app.route("/crash/<int:cid>")
@@ -176,6 +176,21 @@ def submit():
 
     db.session.add(md)
     db.session.commit()
+    
+    if 'ELK' in app.config and app.config['ELK'] != None:
+        elk = ret
+        elk["product_name"] = product.name
+        elk["product_version"] = product.version
+        elk["build"] = request.form["build"]
+        elk["filename"] = filename
+        
+        import elasticsearch
+        ELK = elasticsearch.Elasticsearch( ['elk'], port=9200) 
+        ELK_index = 'crashes'
+        ELK_docType = 'crash'
+        #app.config['ELK'].index(app.config['ELK_index'], app.config['ELK_docType'], body=elk)
+        ELK.index(ELK_index, ELK_docType, body=elk)
+
 
     return render_template("upload_success.html")
 
@@ -186,7 +201,7 @@ def handleInvalidUsage(error):
 
 @app.template_filter("datetime")
 def format_datetime(value):
-	return str (value)
+    return str (value)
     #from babel.dates import format_datetime
     #return format_datetime(value, "YYYY-MM-dd 'at' HH:mm:ss")
 
