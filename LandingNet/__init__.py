@@ -15,9 +15,11 @@ logging.getLogger('werkzeug').setLevel(logging.DEBUG)
 @app.route("/")
 def index():
     from sqlalchemy import func
-    from LandingNet.models import Crashs
-    # TODO : Update this to query MiniDump and join with product and stacktrace
-    traces = Crashs.query.order_by(Crashs.updated.desc()).limit(10).all()
+    from LandingNet.models import Crashs, MiniDump, Product
+    #traces = MiniDump.query.join(Crashs,(Crashs.id == MiniDump.crash_id)).join(Product,(Product.id == MiniDump.product_id)).add_columns(Crashs.name.label("crash_name"), \
+	#Crashs.id.label("crash_id"), Crashs.count.label("crash_count"), Product.name.label("product_name"), \
+	#Crashs.updated.label("crash_updated"), MiniDump.build.label("build"), MiniDump.os.label("os")).distinct(Crashs.name)
+	Crashs.query.order_by(Crashs.updated.desc()).limit(100).all()
     return render_template("index.html", traces=traces)
 
 @app.route("/crash/<int:cid>")
@@ -170,6 +172,7 @@ def submit():
     md.build = request.form["build"]
     md.data = ret["data"]
     md.system_info = ret["systemInfo"]
+    md.os = md.system_info["os"]
     md.name = ret["name"]
 
     crash.count = crash.count + 1

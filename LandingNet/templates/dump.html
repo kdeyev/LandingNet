@@ -15,23 +15,25 @@
             </div>
         {% endfor %}
     {% endif %}
-    <h3>StackTrace</h3>
+	<h3>StackTrace</h3>
+	<div class="container-fluid">
     <div class="row header bordered">
-        <div class="col-md-1">Module</div>
+        <div class="col-md-2">Module</div>
         <div class="col-md-6">Function</div>
-        <div class="col-md-5">File</div>
+        <div class="col-md-4">File</div>
     </div>
     {% if dumpData.crashing_thread is defined %}
         {% for frame in dumpData.crashing_thread.frames %}
-            <div class="row monospaced bordered {{ loop.cycle('odd', 'even') }}">
-                <div class="col-md-1">{{ frame.module }}</div>
+            <div class="row bordered {{ loop.cycle('odd', 'even') }}">
+                <div class="col-md-2">{{ frame.module }}</div>
                 <div class="col-md-6">{{ frame|normalizeFrame }}</div>
-                <div class="col-md-5">{{ frame.file|normalizeFilename }}</div>
+                <div class="col-md-4">{{ frame.file|normalizeFilename }}</div>
             </div>
         {% endfor %}
     {% else %}
         <div class="alert alert-warning">No crashing thread</div>
     {% endif %}
+	</div>
     {% if advanced %}
         <h3>Loaded modules</h3>
         <div class="row header bordered">
@@ -39,7 +41,7 @@
             <div class="col-md-6">Version</div>
         </div>
         {% for module in dumpData.modules %}
-            <div class="row monospaced bordered {{ loop.cycle('odd', 'even') }}">
+            <div class="row bordered {{ loop.cycle('odd', 'even') }}">
                 <div class="col-md-6">{{ module.filename }}</div>
                 <div class="col-md-6">{{ module.version }}</div>
             </div>
@@ -50,15 +52,15 @@
             {% if loop.index - 1 != dumpData.crash_info.crashing_thread %}
                 <h4> Thread #{{ loop.index - 1 }}</h4>
                 <div class="row header bordered">
-                    <div class="col-md-1">Module</div>
+                    <div class="col-md-2">Module</div>
                     <div class="col-md-6">Function</div>
-                    <div class="col-md-5">File</div>
+                    <div class="col-md-4">File</div>
                 </div>
                 {% for frame in thread.frames %}
-                    <div class="row monospaced bordered {{ loop.cycle('odd', 'even') }}">
-                        <div class="col-md-1">{{ frame.module }}</div>
+                    <div class="row bordered {{ loop.cycle('odd', 'even') }}">
+                        <div class="col-md-2">{{ frame.module }}</div>
                         <div class="col-md-6">{{ frame|normalizeFrame }}</div>
-                        <div class="col-md-5">{{ frame.file|normalizeFilename }}</div>
+                        <div class="col-md-4">{{ frame.file|normalizeFilename }}</div>
                     </div>
                 {% endfor %}
             {% endif %}

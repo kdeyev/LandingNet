@@ -36,6 +36,8 @@ class MiniDump(db.Model):
     signature = db.Column(db.String(40))
     build = db.Column(db.String(40))
     system_info = db.Column(MutableDict.as_mutable(HSTORE))
+	#HSTORE objects could not be used inside "join" queries 
+    #os = db.Column(db.String(20))
     name = db.Column(db.String(255))
     minidump = db.Column(db.String(40))
     data = db.Column(db.Text)
