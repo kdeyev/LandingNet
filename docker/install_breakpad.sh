@@ -12,7 +12,8 @@ cd src
 cd ../
 cd minidump-stackwalk
 make
-cp stackwalker ../../bin/
+#mkdir ../../bin/
+#cp stackwalker ../../bin/
 cd ../../
 
 
