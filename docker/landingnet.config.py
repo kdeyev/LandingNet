@@ -9,9 +9,8 @@ BREAKPAD_DEBUG_SYMBOLS_DIR = "breakpad-debug-symbols"
 DEBUG_SYMBOLS_DIR = "debug-symbols"
 STACKWALKER = "/breakpad/bin/stackwalker"
 TITLE = "LandingNet"
+ELK_INDEX = "crashes"
+ELK_DOCTYPE = "crash"
 
-ELK = None
 import elasticsearch
-ELK = elasticsearch.Elasticsearch()  # use default of localhost, port 9200
-ELK_index = 'crashes'
-ELK_docType = 'crash'
+ELK = elasticsearch.Elasticsearch( ["elk"], port=9200)

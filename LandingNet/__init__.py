@@ -184,13 +184,10 @@ def submit():
         elk["build"] = request.form["build"]
         elk["filename"] = filename
         
-        import elasticsearch
-        ELK = elasticsearch.Elasticsearch( ['elk'], port=9200) 
-        ELK_index = 'crashes'
-        ELK_docType = 'crash'
-        #app.config['ELK'].index(app.config['ELK_index'], app.config['ELK_docType'], body=elk)
-        ELK.index(ELK_index, ELK_docType, body=elk)
-
+        ELK = app.config['ELK'] 
+        index = app.config['ELK_INDEX']
+        docType = app.config['ELK_DOCTYPE']
+        ELK.index(index, docType, id=md.id, body=elk)
 
     return render_template("upload_success.html")
 
