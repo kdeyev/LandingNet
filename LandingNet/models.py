@@ -25,8 +25,6 @@ class MiniDump(db.Model):
     __tablename__ = "minidump"
     from sqlalchemy.ext.mutable import MutableDict
     from sqlalchemy.dialects.postgresql import HSTORE
-
-
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.now)
     product_id = db.Column(db.Integer, db.ForeignKey("product.id"))
@@ -36,7 +34,7 @@ class MiniDump(db.Model):
     signature = db.Column(db.String(40))
     build = db.Column(db.String(40))
     system_info = db.Column(MutableDict.as_mutable(HSTORE))
-	#HSTORE objects could not be used inside "join" queries 
+    #HSTORE objects could not be used inside "join" queries 
     #os = db.Column(db.String(20))
     name = db.Column(db.String(255))
     minidump = db.Column(db.String(40))

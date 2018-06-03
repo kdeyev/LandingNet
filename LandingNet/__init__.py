@@ -179,6 +179,18 @@ def submit():
 
     db.session.add(md)
     db.session.commit()
+    
+    if 'ELK' in app.config and app.config['ELK'] != None:
+        elk = ret
+        elk["product_name"] = product.name
+        elk["product_version"] = product.version
+        elk["build"] = request.form["build"]
+        elk["filename"] = filename
+        
+        ELK = app.config['ELK'] 
+        index = app.config['ELK_INDEX']
+        docType = app.config['ELK_DOCTYPE']
+        ELK.index(index, docType, id=md.id, body=elk)
 
     return render_template("upload_success.html")
 
@@ -189,7 +201,7 @@ def handleInvalidUsage(error):
 
 @app.template_filter("datetime")
 def format_datetime(value):
-	return str (value)
+    return str (value)
     #from babel.dates import format_datetime
     #return format_datetime(value, "YYYY-MM-dd 'at' HH:mm:ss")
 
