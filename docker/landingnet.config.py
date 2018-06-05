@@ -14,3 +14,11 @@ ELK_DOCTYPE = "crash"
 
 import elasticsearch
 ELK = elasticsearch.Elasticsearch( ["elk"], port=9200)
+
+import json
+from jira import JIRA
+from jira import JIRAError
+products_conf_file = open("/LandingNet/LandingNet/products.conf","r")
+PRODUCTS_MAP = json.load(products_conf_file)
+JIRA_CLIENT  = JIRA(options={'server': 'http://jira.pdgm.com:8080', 'rest_api_version': 'latest'}, basic_auth=('farmer', 'MkeShrgF6') )
+
