@@ -179,7 +179,6 @@ def submit():
     md.build = request.form["build"]
     md.data = ret["data"]
     md.system_info = ret["systemInfo"]
-    md.os = md.system_info["os"]
     md.name = ret["name"]
 
     crash.count = crash.count + 1
