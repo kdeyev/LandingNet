@@ -170,7 +170,8 @@ def submit():
         description = "Product {} is crashed. Please check URL {} for further details". format(product.name, crash_url)
         issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
             description=description, issuetype={'name': 'Bug'},customfield_10121={'value': '2-Medium'},versions=[{'name': 'Paradigm 18'}],components=[{'name': component}])
-
+        crash.jira_url = issue.permalink()
+			
     md = models.MiniDump()
     md.crash_id = crash.id
     md.product_id = product.id
@@ -185,7 +186,17 @@ def submit():
 
     db.session.add(md)
     db.session.commit()
-
+    
+    if 'ELK' in app.config and app.config['ELK'] != None:
+        elk = ret
+        elk["product_name"] = product.name
+        elk["product_version"] = product.version
+        elk["build"] = request.form["build"]
+        elk["filename"] = filename      
+        ELK = app.config['ELK'] 
+        index = app.config['ELK_INDEX']
+        docType = app.config['ELK_DOCTYPE']
+        result = ELK.index(index, docType, id=md.id, body=elk)
     return render_template("upload_success.html")
 
 @app.errorhandler(InvalidUsage)
