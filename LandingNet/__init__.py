@@ -164,8 +164,11 @@ def submit():
         crash.signature = ret["signature"]
         db.session.add(crash)
         db.session.commit()
-        project = app.config["PRODUCTS_MAP"][product.name][0]
-        component = app.config["PRODUCTS_MAP"][product.name][1]
+        project = "PREV"
+        component = "CoreEngine"            
+        if (app.config["PRODUCTS_MAP"].has_key(product.name)):
+            project = app.config["PRODUCTS_MAP"][product.name][0]
+            component = app.config["PRODUCTS_MAP"][product.name][1]
         crash_url = request.host_url.rstrip('/') + url_for('crash', cid=crash.id)
         description = "Product {} is crashed. Please check URL {} for further details". format(product.name, crash_url)
         issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
@@ -219,6 +222,14 @@ def normalizeFilename(value):
 
     return filename
 
+@app.template_filter("normalizeLine")
+def normalizeLine(frame):
+    result = ""
+    if frame.get("line"):
+        result += ":" + str(frame["line"])
+
+    return result
+
 @app.template_filter("normalizeFrame")
 def normalizeFrame(frame):
     ret = ""
@@ -227,8 +238,5 @@ def normalizeFrame(frame):
         ret = frame["function"]
     else:
         ret = "N/A"
-
-    if frame.get("line"):
-        ret += ":" + str(frame["line"])
 
     return ret

@@ -27,7 +27,7 @@
             <div class="row bordered {{ loop.cycle('odd', 'even') }}">
                 <div class="col-md-2">{{ frame.module }}</div>
                 <div class="col-md-6">{{ frame|normalizeFrame }}</div>
-                <div class="col-md-4">{{ frame.file|normalizeFilename }}</div>
+                <div class="col-md-4">{{ frame.file|normalizeFilename }}{{ frame|normalizeLine}}</div>
             </div>
         {% endfor %}
     {% else %}
@@ -60,10 +60,12 @@
                     <div class="row bordered {{ loop.cycle('odd', 'even') }}">
                         <div class="col-md-2">{{ frame.module }}</div>
                         <div class="col-md-6">{{ frame|normalizeFrame }}</div>
-                        <div class="col-md-4">{{ frame.file|normalizeFilename }}</div>
+                        <div class="col-md-4">{{ frame.file|normalizeFilename }}{{ frame|normalizeLine}}</div>
                     </div>
                 {% endfor %}
             {% endif %}
         {% endfor %}
     {% endif %}
+<p></p><p></p><p></p>
 {% endmacro %}
+

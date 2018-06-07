@@ -27,7 +27,7 @@ def processMinidump(f):
     i = 0;
     if pdata.get("crashing_thread"):
         for frame in pdata["crashing_thread"]["frames"]:
-            if i > 10:
+            if i > 20:
                 break;
 
             fn = None
