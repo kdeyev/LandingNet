@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile_breakpad
-    image: breakpad
+    image: 192.168.203.109:5000/breakpad
 
   # landingnet app
   crash-collector:
