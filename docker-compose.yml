@@ -17,14 +17,21 @@ services:
 #    volumes:
 #      - DB: /var/lib/pgsql
       
+  breakpad:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_breakpad
+    image: breakpad
+
   # landingnet app
-  landingnet:
+  crash-collector:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: 192.168.203.109:5000/landingnet
+    image: 192.168.203.109:5000/crash-collector
     depends_on:
       - postgresql
+      - breakpad
     command: ["./docker/start_landingnet.sh"]
     ports:
       - "5000:5000"
