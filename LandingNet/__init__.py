@@ -149,7 +149,11 @@ def submit():
 
     product = models.Product.query.filter_by(version=request.form["version"], name=request.form["product"]).first()
     if product is None:
-        raise InvalidUsage("Product %s version %s not found" % (request.form["product"], request.form["version"]))
+        product = models.Product()
+        product.name = request.form["product"]
+        product.version = request.form["version"]
+        db.session.add(product);
+        db.session.commit()
 
     filename = str(uuid.uuid4()) + ".dmp"
     file.save(os.path.join(app.config["MINIDUMP_UPDLOAD_DIR"], filename))
