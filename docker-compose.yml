@@ -1,5 +1,3 @@
-# docker-compose for Socorro development.
-#
 # Note: Requires docker-comopse 1.10+.
 version: "2"
 services:
@@ -8,7 +6,7 @@ services:
     build:
       context: ./docker-postgresql
       dockerfile: ./Dockerfile
-    image: kdeyev/pstgrsql
+    image: 192.168.203.109:5000/pstgrsql
     ports:
       - "5432:5432"
     environment:
@@ -19,14 +17,21 @@ services:
 #    volumes:
 #      - DB: /var/lib/pgsql
       
+  breakpad:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_breakpad
+    image: 192.168.203.109:5000/breakpad
+
   # landingnet app
-  landingnet:
+  crash-collector:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: kdeyev/landingnet
+    image: 192.168.203.109:5000/crash-collector
     depends_on:
       - postgresql
+      - breakpad
     command: ["./docker/start_landingnet.sh"]
     ports:
       - "5000:5000"
@@ -38,7 +43,7 @@ services:
     build:
       context: ./elk-docker
       dockerfile: ./Dockerfile
-    image: elk
+    image: 192.168.203.109:5000/elk
     ports:
       - "5601:5601"
       - "9200:9200"
