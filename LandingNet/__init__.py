@@ -188,6 +188,7 @@ def submit():
     md.data = ret["data"]
     md.system_info = ret["systemInfo"]
     md.name = ret["name"]
+    md.user = request.form["user"]
 
     crash.count = crash.count + 1
 
@@ -199,6 +200,7 @@ def submit():
         elk["product_name"] = product.name
         elk["product_version"] = product.version
         elk["build"] = request.form["build"]
+        elk["user"] = request.form["user"]
         elk["filename"] = filename      
         ELK = app.config['ELK'] 
         index = app.config['ELK_INDEX']
