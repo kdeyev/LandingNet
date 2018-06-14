@@ -13,7 +13,7 @@ ELK_INDEX = "crashes"
 ELK_DOCTYPE = "crash"
 
 import elasticsearch
-ELK = elasticsearch.Elasticsearch( ["elk"], port=9200)
+ELK = elasticsearch.Elasticsearch( ["elasticsearch-logging"], port=9200)
 
 import json
 from jira import JIRA
