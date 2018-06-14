@@ -39,4 +39,5 @@ class MiniDump(db.Model):
     #os = db.Column(db.String(20))
     name = db.Column(db.String(255))
     minidump = db.Column(db.String(40))
+    user = db.Column(db.String(20))
     data = db.Column(db.Text)
