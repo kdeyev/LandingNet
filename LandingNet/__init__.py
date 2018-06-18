@@ -166,8 +166,6 @@ def submit():
         crash.count = 0
         crash.name = ret["name"]
         crash.signature = ret["signature"]
-        db.session.add(crash)
-        db.session.commit()
         project = "PREV"
         component = "CoreEngine"            
         if (app.config["PRODUCTS_MAP"].has_key(product.name)):
@@ -178,7 +176,9 @@ def submit():
         issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
             description=description, issuetype={'name': 'Bug'},customfield_10121={'value': '2-Medium'},versions=[{'name': 'Paradigm 18'}],components=[{'name': component}])
         crash.jira_url = issue.permalink()
-			
+        db.session.add(crash)
+        db.session.commit()
+        
     md = models.MiniDump()
     md.crash_id = crash.id
     md.product_id = product.id
@@ -236,6 +236,11 @@ def normalizeLine(frame):
 
     return result
 
+@app.template_filter("normalizeIssue")
+def normalizeIssue(issueUrl):
+    splitted = issueUrl.split("/")
+    return splitted[len(splitted) - 1]
+       
 @app.template_filter("normalizeFrame")
 def normalizeFrame(frame):
     ret = ""
