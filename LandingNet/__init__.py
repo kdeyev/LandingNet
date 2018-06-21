@@ -147,6 +147,9 @@ def submit():
     if "version" not in request.form:
         raise InvalidUsage("Version is not specified")
 
+    if "user" not in request.form:
+        raise InvalidUsage("User is not specified")
+
     product = models.Product.query.filter_by(version=request.form["version"], name=request.form["product"]).first()
     if product is None:
         product = models.Product()
