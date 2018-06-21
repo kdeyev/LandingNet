@@ -1,4 +1,4 @@
-FROM breakpad
+FROM 192.168.203.109:5000/breakpad
 
 # workdir and user
 WORKDIR /LandingNet
