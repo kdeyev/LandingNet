@@ -147,6 +147,9 @@ def submit():
     if "version" not in request.form:
         raise InvalidUsage("Version is not specified")
 
+    if "user" not in request.form:
+        raise InvalidUsage("User is not specified")
+
     product = models.Product.query.filter_by(version=request.form["version"], name=request.form["product"]).first()
     if product is None:
         product = models.Product()
@@ -178,7 +181,7 @@ def submit():
         issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
             description=description, issuetype={'name': 'Bug'},customfield_10121={'value': '2-Medium'},versions=[{'name': 'Paradigm 18'}],components=[{'name': component}])
         crash.jira_url = issue.permalink()
-			
+        
     md = models.MiniDump()
     md.crash_id = crash.id
     md.product_id = product.id
@@ -236,6 +239,13 @@ def normalizeLine(frame):
 
     return result
 
+@app.template_filter("normalizeIssue")
+def normalizeIssue(issueUrl):
+    if issueUrl is None:
+        return ""
+    splitted = issueUrl.split("/")
+    return splitted[len(splitted) - 1]
+       
 @app.template_filter("normalizeFrame")
 def normalizeFrame(frame):
     ret = ""
