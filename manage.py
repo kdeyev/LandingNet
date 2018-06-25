@@ -1,3 +1,5 @@
+#!/bin/python
+
 from flask.ext.script import Manager, prompt
 from flask.ext.migrate import Migrate, MigrateCommand
 from LandingNet import app, db 

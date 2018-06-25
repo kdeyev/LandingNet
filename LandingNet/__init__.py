@@ -18,8 +18,8 @@ def index():
     from sqlalchemy import func
     from LandingNet.models import Crashs, MiniDump, Product
     #traces = MiniDump.query.join(Crashs,(Crashs.id == MiniDump.crash_id)).join(Product,(Product.id == MiniDump.product_id)).add_columns(Crashs.name.label("crash_name"), \
-	#Crashs.id.label("crash_id"), Crashs.count.label("crash_count"), Product.name.label("product_name"), \
-	#Crashs.updated.label("crash_updated"), MiniDump.build.label("build"), MiniDump.os.label("os")).distinct(Crashs.name)
+    #Crashs.id.label("crash_id"), Crashs.count.label("crash_count"), Product.name.label("product_name"), \
+    #Crashs.updated.label("crash_updated"), MiniDump.build.label("build"), MiniDump.os.label("os")).distinct(Crashs.name)
     traces = Crashs.query.order_by(Crashs.updated.desc()).limit(100).all()
     return render_template("index.html", traces=traces)
 
@@ -172,15 +172,16 @@ def submit():
         db.session.add(crash)
         db.session.commit()
         project = "PREV"
-        component = "CoreEngine"            
-        if (app.config["PRODUCTS_MAP"].has_key(product.name)):
-            project = app.config["PRODUCTS_MAP"][product.name][0]
-            component = app.config["PRODUCTS_MAP"][product.name][1]
-        crash_url = request.host_url.rstrip('/') + url_for('crash', cid=crash.id)
-        description = "Product {} is crashed. Please check URL {} for further details". format(product.name, crash_url)
-        issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
-            description=description, issuetype={'name': 'Bug'},customfield_10121={'value': '2-Medium'},versions=[{'name': 'Paradigm 18'}],components=[{'name': component}])
-        crash.jira_url = issue.permalink()
+        component = "CoreEngine"
+        if "JIRA_CLIENT" in app.config and "PRODUCTS_MAP" in app.config:
+            if (app.config["PRODUCTS_MAP"].has_key(product.name)):
+                project = app.config["PRODUCTS_MAP"][product.name][0]
+                component = app.config["PRODUCTS_MAP"][product.name][1]
+            crash_url = request.host_url.rstrip('/') + url_for('crash', cid=crash.id)
+            description = "Product {} is crashed. Please check URL {} for further details". format(product.name, crash_url)
+            issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
+                description=description, issuetype={'name': 'Bug'},customfield_10121={'value': '2-Medium'},versions=[{'name': 'Paradigm 18'}],components=[{'name': component}])
+            crash.jira_url = issue.permalink()
         
     md = models.MiniDump()
     md.crash_id = crash.id
@@ -218,7 +219,7 @@ def handleInvalidUsage(error):
 
 @app.template_filter("datetime")
 def format_datetime(value):
-	return str (value)
+    return str (value)
     #from babel.dates import format_datetime
     #return format_datetime(value, "YYYY-MM-dd 'at' HH:mm:ss")
 

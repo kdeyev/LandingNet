@@ -25,6 +25,7 @@ COPY docker/start_landingnet.sh /LandingNet/docker/start_landingnet.sh
 
 # copy config
 COPY docker/landingnet.config.py /LandingNet/LandingNet/config.py
+COPY docker/products.conf /LandingNet/LandingNet/products.conf
 
 VOLUME ["/LandingNet/debug-symbols"]
 VOLUME ["/LandingNet/minidumps"]
