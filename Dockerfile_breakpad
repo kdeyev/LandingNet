@@ -4,15 +4,20 @@ FROM centos:centos7
 RUN mkdir /breakpad
 WORKDIR /breakpad
 
-RUN yum -y install dos2unix
+RUN yum -y install dos2unix wget
+USER 0
+
+RUN yum -y update; 
+RUN yum -y install epel-release;
+
+#RUN cd /etc/yum.repos.d/ && wget https://download.opensuse.org/repositories/home:danimo/CentOS_7/home:danimo.repo
+#RUN yum -y install google-breakpad
 
 COPY third-party/ /breakpad/third-party
 COPY docker/install_breakpad.sh /breakpad/docker/install_breakpad.sh
 RUN dos2unix /breakpad/docker/install_breakpad.sh
 
-USER 0
-
-RUN yum -y update; 
-RUN yum -y install epel-release;
+RUN yum -y install git svn hg;
+RUN yum -y install gcc gcc-c++ make;
 
 RUN /breakpad/docker/install_breakpad.sh

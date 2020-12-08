@@ -24,11 +24,11 @@ def processMinidump(f):
     separator = ""
     lastCall = None
 
-    i = 0;
+    i = 0
     if pdata.get("crashing_thread"):
         for frame in pdata["crashing_thread"]["frames"]:
             if i > 20:
-                break;
+                break
 
             fn = None
             line = None

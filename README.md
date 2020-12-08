@@ -144,7 +144,7 @@ curl -F minidump=@demo/demo.dmp -F product=Demo -F version=0.1 -F build=foobar h
     version : Version number (Must be an existing version)
 ```
 
-**Using Docker**
+# Using Docker
 create postgresql 
 ```cd docker-postgresql && docker build -t kdeyev/pstgrsql .```
 
@@ -156,7 +156,7 @@ run landingnet
 or
 ```docker run --rm -p 5000:5000 kdeyev/landingnet```
 
-**Using Docker-compose**
+## Using Docker-compose
 ```docker-compose build```
 
 ```docker-compose up```

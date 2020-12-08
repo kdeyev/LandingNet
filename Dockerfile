@@ -18,7 +18,7 @@ RUN dos2unix /LandingNet/docker/install_django.sh docker/install_django.sh
 RUN yum -y update; 
 RUN yum -y install epel-release;
 RUN docker/install_django.sh
-RUN pip install jira
+# RUN pip install jira
 
 # copy a demo
 COPY demo /LandingNet/demo

@@ -28,11 +28,11 @@ if os.environ.has_key("ELK_SERVER"):
 if os.environ.has_key("JIRA_SERVER") and os.environ.has_key("JIRA_USER") and os.environ.has_key("JIRA_PASSWD"):
     try:
         import json
-        from jira import JIRA
-        from jira import JIRAError
-        products_conf_file = open("/LandingNet/LandingNet/products.conf","r")
-        PRODUCTS_MAP = json.load(products_conf_file)
-        JIRA_CLIENT  = JIRA(options={'server': os.environ["ELK_SERVER"], 'rest_api_version': 'latest'}, basic_auth=(os.environ["JIRA_USER"], os.environ["JIRA_PASSWD"]) )
+        # from jira import JIRA
+        # from jira import JIRAError
+        # products_conf_file = open("/LandingNet/LandingNet/products.conf","r")
+        # PRODUCTS_MAP = json.load(products_conf_file)
+        # JIRA_CLIENT  = JIRA(options={'server': os.environ["ELK_SERVER"], 'rest_api_version': 'latest'}, basic_auth=(os.environ["JIRA_USER"], os.environ["JIRA_PASSWD"]) )
     except:
         PRODUCTS_MAP = None
         JIRA_CLIENT  = None
