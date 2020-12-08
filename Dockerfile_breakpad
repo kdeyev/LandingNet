@@ -4,8 +4,11 @@ FROM centos:centos7
 RUN mkdir /breakpad
 WORKDIR /breakpad
 
+RUN yum -y install dos2unix
+
 COPY third-party/ /breakpad/third-party
 COPY docker/install_breakpad.sh /breakpad/docker/install_breakpad.sh
+RUN dos2unix /breakpad/docker/install_breakpad.sh
 
 USER 0
 

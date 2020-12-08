@@ -9,12 +9,14 @@ MAINTAINER The CentOS Project <cloud-ops@centos.org>
 
 RUN yum -y update; yum clean all
 RUN yum -y install sudo epel-release; yum clean all
+RUN yum -y install dos2unix
 RUN yum -y install postgresql-server postgresql postgresql-contrib supervisor pwgen; yum clean all
 
 ADD ./postgresql-setup /usr/bin/postgresql-setup
 ADD ./supervisord.conf /etc/supervisord.conf
 ADD ./start_postgres.sh /start_postgres.sh
 ADD ./create_extension.sh /create_extension.sh
+RUN dos2unix /usr/bin/postgresql-setup /etc/supervisord.conf /start_postgres.sh /create_extension.sh
 
 #remove me
 ENV POSTGRES_USER landingnet
