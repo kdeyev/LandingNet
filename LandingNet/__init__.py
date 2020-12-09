@@ -172,16 +172,6 @@ def submit():
         db.session.add(crash)
         db.session.commit()
         project = "PREV"
-        # component = "CoreEngine"
-        # if "JIRA_CLIENT" in app.config and "PRODUCTS_MAP" in app.config:
-        #     if (app.config["PRODUCTS_MAP"].has_key(product.name)):
-        #         project = app.config["PRODUCTS_MAP"][product.name][0]
-        #         component = app.config["PRODUCTS_MAP"][product.name][1]
-        #     crash_url = request.host_url.rstrip('/') + url_for('crash', cid=crash.id)
-        #     description = "Product {} is crashed. Please check URL {} for further details". format(product.name, crash_url)
-        #     issue = app.config["JIRA_CLIENT"].create_issue(project=project, summary=ret["name"],
-        #         description=description, issuetype={'name': 'Bug'},customfield_10121={'value': '2-Medium'},versions=[{'name': 'Paradigm 18'}],components=[{'name': component}])
-        #     crash.jira_url = issue.permalink()
         
     md = models.MiniDump()
     md.crash_id = crash.id

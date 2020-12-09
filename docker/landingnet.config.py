@@ -8,7 +8,7 @@ MINIDUMP_UPDLOAD_DIR = "minidumps"
 BREAKPAD_DEBUG_SYMBOLS_DIR = "breakpad-debug-symbols"
 DEBUG_SYMBOLS_DIR = "debug-symbols"
 STACKWALKER = "/breakpad/bin/stackwalker"
-TITLE = "Paradigm Crash Collector"
+TITLE = "Crash Collector"
 ELK_INDEX = "crashes"
 ELK_DOCTYPE = "crash"
 
